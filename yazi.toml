@@ -17,5 +17,9 @@ prepend_previewers = [
   { url = "*.step", run = "stl-preview" },
   { url = "*.stp", run = "stl-preview" },
   { url = "*.ply", run = "stl-preview" },
-  { url = "*.fbx", run = "stl-preview" }
+  { url = "*.fbx", run = "stl-preview" },
+  { mime = "text/*", run = 'piper -- bat --style=numbers --color=always "$1"' },
+  { mime = "application/json", run = 'piper -- bat --style=numbers --color=always "$1"' },
+  { mime = "application/xml", run = 'piper -- bat --style=numbers --color=always "$1"' }
 ]
+
