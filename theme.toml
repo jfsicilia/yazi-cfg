@@ -1,0 +1,4 @@
+# Tabs, matching the tmux window pills (catppuccin mocha).
+[tabs]
+active   = { fg = "#11111b", bg = "#cba6f7", bold = true } # crust on mauve
+inactive = { fg = "#cdd6f4", bg = "#313244" }              # text on surface0
