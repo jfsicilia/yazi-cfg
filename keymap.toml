@@ -15,5 +15,7 @@ prepend_keymap = [
     { on = ["\\", "Z"],     run = "plugin fzf-scoped dirs",           desc = "fzf folders here and below; enter it" },
     { on = ["\\", ","],     run = "shell --block -- nvim ~/.config/yazi/yazi.toml", desc = "Open yazi.toml in nvim" },
     { on = ["\\", "o"],     run = "plugin smart-enter",                desc = "Enter dir or open file" },
+    { on = ["\\", "e"],     run = "plugin ouch-archive extract",           desc = "Extract selected/hovered archives (ouch)" },
+    { on = ["\\", "E"],     run = "plugin ouch-archive compress",          desc = "Compress selected/hovered files (ouch)" },
     { on = "<F5>",          run = "plugin redraw",                     desc = "Force a full repaint" },
 ]
