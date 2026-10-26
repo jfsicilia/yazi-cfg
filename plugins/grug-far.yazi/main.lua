@@ -20,27 +20,36 @@ local function entry(_, job)
 	local mode = job.args[1]
 	local files, cwd = get_state()
 
-	local lua
+	if mode == "files" and #files == 0 then
+		return ya.notify { title = "grug-far", content = "No file to search in", level = "warn" }
+	end
+
+	local label, paths
 	if mode == "files" then
-		if #files == 0 then
-			return ya.notify { title = "grug-far", content = "No file to search in", level = "warn" }
-		end
+		label = #files == 1 and ("replace in " .. files[1]:match("[^/]+$"))
+			or ("replace in " .. #files .. " files")
 		for i, f in ipairs(files) do
 			if f:find("%s") then
 				files[i] = '"' .. f .. '"'
 			end
 		end
-		lua = "lua require('grug-far').open({ windowCreationCommand = 'topleft vertical split',"
-			.. " prefills = { paths = vim.env.YAZI_GRUG_PATHS } })"
+		paths = table.concat(files, " ")
 	else
-		lua = "topleft vertical GrugFar"
+		label = "replace in " .. (cwd:match("[^/]+$") or "") .. "/"
+		paths = ""
 	end
+
+	local lua = "lua require('grug-far').open({ windowCreationCommand = 'topleft vertical split',"
+		.. " instanceName = vim.env.YAZI_GRUG_LABEL,"
+		.. (mode == "files" and " prefills = { paths = vim.env.YAZI_GRUG_PATHS }," or "")
+		.. " })"
 
 	local permit = ui.hide()
 	local child, err = Command("nvim")
 		:arg { "-c", lua }
 		:cwd(cwd)
-		:env("YAZI_GRUG_PATHS", table.concat(files, " "))
+		:env("YAZI_GRUG_PATHS", paths)
+		:env("YAZI_GRUG_LABEL", label)
 		:stdin(Command.INHERIT)
 		:stdout(Command.INHERIT)
 		:stderr(Command.INHERIT)
