@@ -1,3 +1,5 @@
+--- Dual-pane view for yazi, based on terrakok/split-tabs (MIT, see LICENSE).
+--- Adds maximize and renames the actions.
 --- @since 26.5.6
 --- @sync entry
 
@@ -258,19 +260,11 @@ local function deactivate()
     ui.render()
 end
 
-local function spl_activate()
-    activate()
-end
-
-local function spl_deactivate()
-    deactivate()
-end
-
-local function spl_toggle()
+local function toggle()
     if dp then deactivate() else activate() end
 end
 
-local function spl_preview()
+local function preview()
     if not dp then return end
     dp.preview = not dp.preview
     if not dp.preview then dp.max = nil end
@@ -283,7 +277,7 @@ local function spl_preview()
     end
 end
 
-local function spl_maximize()
+local function maximize()
     -- Single-pane mode: fall back to the toggle-pane plugin.
     if not dp then
         ya.emit("plugin", { "toggle-pane", "max-preview" })
@@ -291,14 +285,14 @@ local function spl_maximize()
     end
     dp.max = not dp.max
     if dp.max and not dp.preview then
-        spl_preview()
+        preview()
     else
         ui.render()
         ya.emit("peek", { 0 })
     end
 end
 
-local function spl_switch_tab()
+local function switch_pane()
     if not dp then return end
     ya.emit("tab_switch", { dp.tabs[other_pane()] - 1 })
     ui.render()
@@ -306,7 +300,7 @@ end
 
 -- Apply a file operation to the selection (or the hovered file) and send it
 -- to the other pane.
-local function spl_transfer(operation)
+local function transfer(operation)
     if not dp then return end
 
     local source = cx.active
@@ -336,35 +330,30 @@ local function spl_transfer(operation)
     end, urls, target_cwd, operation)
 end
 
-local function spl_copy()
-    spl_transfer("copy")
+local function copy_to_other()
+    transfer("copy")
 end
 
-local function spl_move()
-    spl_transfer("move")
+local function move_to_other()
+    transfer("move")
 end
+
+local actions = {
+    activate = activate,
+    deactivate = deactivate,
+    toggle = toggle,
+    switch = switch_pane,
+    copy = copy_to_other,
+    move = move_to_other,
+    maximize = maximize,
+    preview = preview,
+}
 
 local function entry(st, job)
     job = type(job) == "string" and { args = { job } } or job
     local act = job and job.args and job.args[1]
-
-    if act == "spl_activate" then
-        spl_activate()
-    elseif act == "spl_deactivate" then
-        spl_deactivate()
-    elseif act == "spl_toggle" then
-        spl_toggle()
-    elseif act == "spl_switch_tab" then
-        spl_switch_tab()
-    elseif act == "spl_copy" then
-        spl_copy()
-    elseif act == "spl_move" then
-        spl_move()
-    elseif act == "spl_maximize" then
-        spl_maximize()
-    elseif act == "spl_preview" then
-        spl_preview()
-    end
+    local fn = actions[act]
+    if fn then fn() end
 end
 
 return { entry = entry }
