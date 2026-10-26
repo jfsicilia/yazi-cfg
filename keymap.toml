@@ -6,7 +6,7 @@ prepend_keymap = [
     { on = ["\\", "c"],     run = [ "escape --visual", "plugin dual-pane copy" ], desc = "Dual-pane: copy to other pane" },
     { on = ["\\", "x"],     run = [ "escape --visual", "plugin dual-pane move" ], desc = "Dual-pane: move to other pane" },
     { on = ["\\", "p"],     run = "plugin dual-pane preview",    desc = "Dual-pane: toggle preview pane" },
-    { on = ["\\", "m"],     run = "plugin dual-pane maximize",   desc = "Dual-pane: maximize/restore preview" },
+    { on = ["\\", "m"],     run = [ "plugin dual-pane maximize", "plugin redraw" ], desc = "Dual-pane: maximize/restore preview (then repaint)" },
     { on = ["\\", "r"],     run = "plugin grug-far files",            desc = "Search & replace in selected/hovered files (grug-far)" },
     { on = ["\\", "R"],     run = "plugin grug-far workspace",        desc = "Search & replace in current folder (grug-far)" },
     { on = ["\\", "s"],     run = "plugin rg-scoped files",           desc = "Search (rg) in selected/hovered files, open hit in nvim" },
@@ -15,4 +15,5 @@ prepend_keymap = [
     { on = ["\\", "Z"],     run = "plugin fzf-scoped dirs",           desc = "fzf folders here and below; enter it" },
     { on = ["\\", ","],     run = "shell --block -- nvim ~/.config/yazi/yazi.toml", desc = "Open yazi.toml in nvim" },
     { on = ["\\", "o"],     run = "plugin smart-enter",                desc = "Enter dir or open file" },
+    { on = "<F5>",          run = "plugin redraw",                     desc = "Force a full repaint" },
 ]
