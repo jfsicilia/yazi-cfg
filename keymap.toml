@@ -9,4 +9,6 @@ prepend_keymap = [
     { on = ["\\", "m"],     run = "plugin split-tabs spl_maximize",   desc = "Split-tabs: maximize/restore preview" },
     { on = ["\\", "r"],     run = "plugin grug-far files",            desc = "Search & replace in selected/hovered files (grug-far)" },
     { on = ["\\", "R"],     run = "plugin grug-far workspace",        desc = "Search & replace in current folder (grug-far)" },
+    { on = ["\\", ","],     run = "shell --block -- nvim ~/.config/yazi/yazi.toml", desc = "Open yazi.toml in nvim" },
+    { on = ["\\", "o"],     run = "plugin smart-enter",                desc = "Enter dir or open file" },
 ]
