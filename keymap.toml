@@ -1,10 +1,12 @@
+# Custom shortcuts live under the `\` prefix (like a leader key).
 [mgr]
 prepend_keymap = [
-    { on = "\\",    run = "plugin split-tabs spl_toggle",     desc = "Split-tabs: toggle dual pane" },
-    { on = "<Tab>", run = "plugin split-tabs spl_switch_tab", desc = "Split-tabs: switch pane" },
-    { on = "<F5>",  run = [ "escape --visual", "plugin split-tabs spl_copy" ], desc = "Split-tabs: copy to other pane" },
-    { on = "<F6>",  run = [ "escape --visual", "plugin split-tabs spl_move" ], desc = "Split-tabs: move to other pane" },
-    { on = "P",     run = "plugin split-tabs spl_preview",    desc = "Split-tabs: toggle preview" },
-
-    { on = "T",     run = "plugin split-tabs spl_maximize", desc = "Split-tabs: maximize/restore preview" }
+    { on = ["\\", "\\"],    run = "plugin split-tabs spl_toggle",     desc = "Split-tabs: toggle dual pane" },
+    { on = ["\\", "<Tab>"], run = "plugin split-tabs spl_switch_tab", desc = "Split-tabs: switch pane" },
+    { on = ["\\", "c"],     run = [ "escape --visual", "plugin split-tabs spl_copy" ], desc = "Split-tabs: copy to other pane" },
+    { on = ["\\", "x"],     run = [ "escape --visual", "plugin split-tabs spl_move" ], desc = "Split-tabs: move to other pane" },
+    { on = ["\\", "p"],     run = "plugin split-tabs spl_preview",    desc = "Split-tabs: toggle preview pane" },
+    { on = ["\\", "m"],     run = "plugin split-tabs spl_maximize",   desc = "Split-tabs: maximize/restore preview" },
+    { on = ["\\", "r"],     run = "plugin grug-far files",            desc = "Search & replace in selected/hovered files (grug-far)" },
+    { on = ["\\", "R"],     run = "plugin grug-far workspace",        desc = "Search & replace in current folder (grug-far)" },
 ]
