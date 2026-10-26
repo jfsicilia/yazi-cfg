@@ -1,7 +1,8 @@
---- Dual-pane view for yazi, based on terrakok/split-tabs (MIT, see LICENSE).
---- Adds maximize and renames the actions.
 --- @since 26.5.6
 --- @sync entry
+
+-- Dual-pane view for yazi, based on terrakok/split-tabs (MIT, see LICENSE).
+-- Adds maximize and renames the actions.
 
 -- nil when inactive; holds all dual-pane state when active.
 local dp = nil
