@@ -17,5 +17,8 @@ prepend_keymap = [
     { on = ["\\", "o"],     run = "plugin smart-enter",                desc = "Enter dir or open file" },
     { on = ["\\", "e"],     run = "plugin ouch-archive extract",           desc = "Extract selected/hovered archives (ouch)" },
     { on = ["\\", "E"],     run = "plugin ouch-archive compress",          desc = "Compress selected/hovered files (ouch)" },
+    { on = ["\\", "<Up>"],   run = "sort --reverse=no",                desc = "Sort ascending (keeps the sort method)" },
+    { on = ["\\", "<Down>"], run = "sort --reverse=yes",               desc = "Sort descending (keeps the sort method)" },
+    { on = ["\\", "v"],     run = "shell --block -- vimdiff.sh %s",   desc = "Diff the two selected files/folders in nvim" },
     { on = "<F5>",          run = "plugin redraw",                     desc = "Force a full repaint" },
 ]
