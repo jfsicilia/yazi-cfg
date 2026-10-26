@@ -2,3 +2,13 @@
 [tabs]
 active   = { fg = "#11111b", bg = "#cba6f7", bold = true } # crust on mauve
 inactive = { fg = "#cdd6f4", bg = "#313244" }              # text on surface0
+
+# Mode pills (bottom left: mode + file info, bottom right: position), catppuccin mocha.
+# `main` is the mode label, `alt` the segment next to it.
+[mode]
+normal_main = { fg = "#11111b", bg = "#cba6f7", bold = true } # crust on mauve
+normal_alt  = { fg = "#cdd6f4", bg = "#313244" }              # text on surface0
+select_main = { fg = "#11111b", bg = "#a6e3a1", bold = true } # crust on green
+select_alt  = { fg = "#cdd6f4", bg = "#313244" }
+unset_main  = { fg = "#11111b", bg = "#f38ba8", bold = true } # crust on red
+unset_alt   = { fg = "#cdd6f4", bg = "#313244" }
