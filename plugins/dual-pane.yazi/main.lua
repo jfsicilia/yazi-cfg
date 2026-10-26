@@ -266,7 +266,11 @@ local function toggle()
 end
 
 local function preview()
-    if not dp then return end
+    -- Single-pane mode: fall back to the toggle-pane plugin.
+    if not dp then
+        ya.emit("plugin", { "toggle-pane", "min-preview" })
+        return
+    end
     dp.preview = not dp.preview
     if not dp.preview then dp.max = nil end
     ui.render()

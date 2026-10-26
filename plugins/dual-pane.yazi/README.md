@@ -16,5 +16,5 @@ Run with `plugin dual-pane <action>`:
 | `switch`     | Move focus to the other pane                                           |
 | `copy`       | Copy selected (or hovered) files to the other pane                     |
 | `move`       | Move selected (or hovered) files to the other pane                     |
-| `preview`    | Show or hide the full-width preview under the panes                    |
+| `preview`    | Show or hide the full-width preview under the panes; falls back to `toggle-pane min-preview` when not in dual-pane mode |
 | `maximize`   | Preview fills the whole area; falls back to `toggle-pane max-preview` when not in dual-pane mode |
