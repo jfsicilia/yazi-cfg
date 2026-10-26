@@ -5,6 +5,7 @@ prepend_keymap = [
     { on = ["\\", "<Tab>"], run = "plugin dual-pane switch", desc = "Dual-pane: switch pane" },
     { on = ["\\", "c"],     run = [ "escape --visual", "plugin dual-pane copy" ], desc = "Dual-pane: copy to other pane" },
     { on = ["\\", "x"],     run = [ "escape --visual", "plugin dual-pane move" ], desc = "Dual-pane: move to other pane" },
+    { on = ["\\", "w"],     run = "plugin dual-pane close",          desc = "Dual-pane: close the focused pane" },
     { on = ["\\", "p"],     run = "plugin dual-pane preview",    desc = "Dual-pane: toggle preview pane" },
     { on = ["\\", "m"],     run = [ "plugin dual-pane maximize", "plugin redraw" ], desc = "Dual-pane: maximize/restore preview (then repaint)" },
     { on = ["\\", "r"],     run = "plugin grug-far files",            desc = "Search & replace in selected/hovered files (grug-far)" },
@@ -20,5 +21,6 @@ prepend_keymap = [
     { on = ["\\", "<Up>"],   run = "sort --reverse=no",                desc = "Sort ascending (keeps the sort method)" },
     { on = ["\\", "<Down>"], run = "sort --reverse=yes",               desc = "Sort descending (keeps the sort method)" },
     { on = ["\\", "v"],     run = "shell --block -- vimdiff.sh %s",   desc = "Diff the two selected files/folders in nvim" },
+    { on = ["\\", "t"],     run = "shell --block -- $SHELL",          desc = "Open a shell in the current folder (exit returns here)" },
     { on = "<F5>",          run = "plugin redraw",                     desc = "Force a full repaint" },
 ]

@@ -13,6 +13,7 @@ Run with `plugin dual-pane <action>`:
 | `toggle`     | Turn dual-pane mode on or off                                          |
 | `activate`   | Turn it on (idempotent, usable from `init.lua`)                        |
 | `deactivate` | Turn it off                                                            |
+| `close`      | Close the focused pane and keep the other one (leaves dual-pane mode)  |
 | `switch`     | Move focus to the other pane                                           |
 | `copy`       | Copy selected (or hovered) files to the other pane                     |
 | `move`       | Move selected (or hovered) files to the other pane                     |

@@ -250,11 +250,17 @@ local function activate()
     ui.render()
 end
 
-local function deactivate()
+-- Leaves dual-pane mode. By default the focused pane stays and the other one
+-- is closed; with `close_focused` the focused pane is closed instead.
+local function deactivate(close_focused)
     if not dp then return end
     ps.unsub("ind-watch")
     ps.unsub("relay-update-files")
-    ya.emit("tab_close", { other_pane() - 1 })
+    if close_focused == true then
+        ya.emit("tab_close", { dp.tabs[active_pane()] - 1 })
+    else
+        ya.emit("tab_close", { other_pane() - 1 })
+    end
     restore_all()
     dp = nil
     saved = {}
@@ -345,7 +351,8 @@ end
 
 local actions = {
     activate = activate,
-    deactivate = deactivate,
+    deactivate = function() deactivate() end,
+    close = function() deactivate(true) end,
     toggle = toggle,
     switch = switch_pane,
     copy = copy_to_other,
