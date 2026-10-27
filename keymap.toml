@@ -22,5 +22,12 @@ prepend_keymap = [
     { on = ["\\", "<Down>"], run = "sort --reverse=yes",               desc = "Sort descending (keeps the sort method)" },
     { on = ["\\", "v"],     run = "shell --block -- vimdiff.sh %s",   desc = "Diff the two selected files/folders in nvim" },
     { on = ["\\", "t"],     run = "shell --block -- $SHELL",          desc = "Open a shell in the current folder (exit returns here)" },
+
+    # `e` prefix (external): open the selected/hovered files with another program.
+    { on = ["e", "m"],       run = "plugin open-in chrome",            desc = "Open selected/hovered in a new chrome window" },
+    { on = ["e", "t"],       run = "plugin open-in terminal",          desc = "Open a foot window in the folder of selected/hovered" },
+    { on = ["e", "v"],       run = "plugin open-in nvim",              desc = "Open selected/hovered in nvim (new foot window)" },
+    { on = ["e", "<Space>"], run = "open --interactive",               desc = "Open with... (interactive menu)" },
+
     { on = "<F5>",          run = "plugin redraw",                     desc = "Force a full repaint" },
 ]
