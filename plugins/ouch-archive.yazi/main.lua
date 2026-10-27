@@ -53,16 +53,22 @@ end
 local function extract(files, cwd)
 	local ok_count, first_dir = 0, nil
 	for _, f in ipairs(files) do
-		local ok, err = ouch({ "decompress", "--no", f }, cwd)
-		if ok then
-			ok_count = ok_count + 1
-			local dir = cwd .. "/" .. extract_dir(f)
-			local is_dir = Command("test"):arg({ "-d", dir }):status()
-			if not first_dir and is_dir and is_dir.success then
-				first_dir = dir
-			end
+		local target = cwd .. "/" .. extract_dir(f)
+		local exists = Command("test"):arg({ "-e", target }):status()
+		if exists and exists.success then
+			-- ouch (with --no) would skip it silently, so say so instead of claiming success.
+			notify(extract_dir(f) .. " already exists, skipped", "warn")
 		else
-			notify(basename(f) .. ": " .. tostring(err):gsub("%s+$", ""), "error")
+			local ok, err = ouch({ "decompress", "--no", f }, cwd)
+			if ok then
+				ok_count = ok_count + 1
+				local is_dir = Command("test"):arg({ "-d", target }):status()
+				if not first_dir and is_dir and is_dir.success then
+					first_dir = target
+				end
+			else
+				notify(basename(f) .. ": " .. tostring(err):gsub("%s+$", ""), "error")
+			end
 		end
 	end
 	if ok_count > 0 then
