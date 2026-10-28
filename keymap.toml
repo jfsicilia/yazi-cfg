@@ -1,6 +1,7 @@
 # Custom shortcuts live under the `\` prefix (like a leader key).
 [mgr]
 prepend_keymap = [
+    { on = "y",             run = "plugin yank-clip",                  desc = "Yank and copy the files to the system clipboard" },
     { on = ["\\", "\\"],    run = "plugin dual-pane toggle",     desc = "Dual-pane: toggle dual pane" },
     { on = ["\\", "<Tab>"], run = "plugin dual-pane switch", desc = "Dual-pane: switch pane" },
     { on = ["\\", "c"],     run = [ "escape --visual", "plugin dual-pane copy" ], desc = "Dual-pane: copy to other pane" },
